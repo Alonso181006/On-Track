@@ -7,7 +7,9 @@
 - Coming soon!
 
 # Credits/Attributions:
-- Coming soon!
+- Home icon made by FreePik from www.flaticon.com
+- Plus icon made by FreePik from www.flaticon.com
+- Profile icon made by Graphics Plazza from www.flaticon.com
 
 # Technologies used:
 - React Native
