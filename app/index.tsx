@@ -30,9 +30,9 @@ export default function App() {
                 />
                 <View className="justify-center pt-5 flex-row gap-2 mt-3">
                     <Text className="text-md text-black">
-                        Don't have and account?
+                        Don't have an account?
                     </Text>
-                    <Link href='/sign-in' className='text-md font-psemibold text-blue-600'> Sign up now</Link>
+                    <Link href='/sign-in' className='text-md font-psemibold text-blue-600'>Sign up now</Link>
                 </View>
             </View>
         </ScrollView>
