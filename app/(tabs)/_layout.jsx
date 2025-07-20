@@ -27,7 +27,7 @@ const Tabslayout = () => {
                     backgroundColor: '#D9D9D9',
                     borderTopWidth: 1,
                     borderTopColor: '#232533',
-                    height: 84
+                    height: 84 // make sure this is not hardcoded, but im just testing out sizes for rn
                 }
             }}>
                 <Tabs.Screen // figure out if there is a way to use tailwind css for header title
