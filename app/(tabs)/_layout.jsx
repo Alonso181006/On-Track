@@ -26,7 +26,7 @@ const Tabslayout = () => {
                 tabBarStyle: {
                     backgroundColor: '#D9D9D9',
                     borderTopWidth: 1,
-                    borderTopColor: '#232533',
+                    borderTopColor: '#232533', // change this border color, it stands out a bit too much
                     height: 84 // make sure this is not hardcoded, but im just testing out sizes for rn
                 }
             }}>
