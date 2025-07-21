@@ -13,9 +13,9 @@ const Home = () => {
                 <Text className="ml-2 mt-2">Nextup</Text>
                 <Text className="mr-2 mt-2">Time</Text>
             </View>
-            <View className="justify-center items-center w-[330px] h-[100px] mb-[40px] rounded-[12] bg-[#EFEBEB]">
+            <View className="justify-center items-center w-[330px] h-[100px] mb-[40px] rounded-[12px] bg-[#EFEBEB]">
                 <TouchableOpacity
-                    className="w-[316px] h-[75px] rounded-[12] bg-[#D9D9D9]"
+                    className="w-[316px] h-[75px] rounded-[12px] bg-[#D9D9D9]"
                     activeOpacity={0.7}>
                     <View className="flex-row my-auto justify-between">
                         <Text className="ml-2">Habit</Text>
