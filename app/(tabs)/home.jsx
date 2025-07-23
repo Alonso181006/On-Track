@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity} from 'react-native'
-import { React, useState} from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { React, useState } from 'react'
 import { Calendar } from 'react-native-calendars'
 
 // lots to fix here, lots of hardcoded values, and static values that should be dynamic

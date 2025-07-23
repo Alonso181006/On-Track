@@ -4,10 +4,10 @@ import { Tabs } from 'expo-router'
 
 import { icons } from "../../constants"
 
-const TabIcon = ({icon, color, name, focused}) => {
+const TabIcon = ({ icon, color, name, focused }) => {
     return (
         <View className="justify-center items-center gap-2">
-            <Image 
+            <Image
                 source={icon}
                 className="w-6 h-6" // make sure this is not hardcoded, but im just testing out sizes for rn
                 resizeMode='contain'
@@ -35,7 +35,7 @@ const Tabslayout = () => {
                     options={{
                         title: "Home",
                         headerTitleStyle: {
-                            fontFamily: "Jaro-Regular", 
+                            fontFamily: "Jaro-Regular",
                             fontSize: 24
                         },
                         headerTitle: "On Track",
@@ -44,22 +44,22 @@ const Tabslayout = () => {
                             backgroundColor: '#D9D9D9',
                             height: 125,
                         },
-                        tabBarIcon: ({color, focused}) => (
-                            <TabIcon 
+                        tabBarIcon: ({ color, focused }) => (
+                            <TabIcon
                                 icon={icons.home}
                                 color={color}
                                 name="Home"
                                 focused={focused}
                             />
                         )
-                    }} 
+                    }}
                 />
                 <Tabs.Screen
                     name='create'
                     options={{
                         title: "Create",
                         headerTitleStyle: {
-                            fontFamily: "Jaro-Regular", 
+                            fontFamily: "Jaro-Regular",
                             fontSize: 24
                         },
                         headerTitle: "On Track",
@@ -68,8 +68,8 @@ const Tabslayout = () => {
                             backgroundColor: '#D9D9D9',
                             height: 125,
                         },
-                        tabBarIcon: ({color, focused}) => (
-                            <TabIcon 
+                        tabBarIcon: ({ color, focused }) => (
+                            <TabIcon
                                 icon={icons.create}
                                 color={color}
                                 name="Create"
@@ -83,7 +83,7 @@ const Tabslayout = () => {
                     options={{
                         title: "Profile",
                         headerTitleStyle: {
-                            fontFamily: "Jaro-Regular", 
+                            fontFamily: "Jaro-Regular",
                             fontSize: 24
                         },
                         headerTitle: "On Track",
@@ -92,8 +92,8 @@ const Tabslayout = () => {
                             backgroundColor: '#D9D9D9',
                             height: 125,
                         },
-                        tabBarIcon: ({color, focused}) => (
-                            <TabIcon 
+                        tabBarIcon: ({ color, focused }) => (
+                            <TabIcon
                                 icon={icons.profile}
                                 color={color}
                                 name="Profile"
