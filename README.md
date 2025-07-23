@@ -7,9 +7,14 @@
 - Coming soon!
 
 # Credits/Attributions:
-- Home icon made by FreePik from www.flaticon.com
-- Plus icon made by FreePik from www.flaticon.com
-- Profile icon made by Graphics Plazza from www.flaticon.com
+- Ellipsis icon made by Pixel Perfect
+- Eye icon made by Kiranshastry
+- Eye Hidden icon made by th studio
+- Home icon made by FreePik
+- Plus icon made by FreePik
+- Profile icon made by Graphics Plazza
+
+All icons were obtained from www.flaticon.com
 
 # Technologies used:
 - React Native
