@@ -32,7 +32,7 @@ export default function App() {
                         <Text className="text-md text-black">
                             Don't have an account?
                         </Text>
-                        <Link href='/sign-in' className='text-md font-psemibold text-blue-600'>Sign up now</Link>
+                        <Link href='/sign-up' className='text-md font-psemibold text-blue-600'>Sign up now</Link>
                     </View>
                 </View>
             </ScrollView>
