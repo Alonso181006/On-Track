@@ -31,14 +31,6 @@ const Home = () => {
                     handleClose={handleClosePopup}
                     isNextUp={true}
                 />
-                {/* <TouchableOpacity
-                    className="w-[316px] h-[75px] rounded-[12px] bg-[#D9D9D9]"
-                    activeOpacity={0.7}>
-                    <View className="flex-row my-auto justify-between">
-                        <Text className="ml-2">Habit</Text>
-                        <Text className="mr-2">Duration</Text>
-                    </View>
-                </TouchableOpacity> */}
             </View>
             <Calendar
                 onDayPress={day => {
