@@ -9,11 +9,7 @@ import Habit from '../../components/Habit'
 const Home = () => {
     const [selected, setSelected] = useState(false);
 
-    const handleNextupPopup = () => {
-
-    }
-
-    const handleClosePopup = () => {
+    const handlePressHabit = () => {
 
     }
 
@@ -27,8 +23,7 @@ const Home = () => {
                 <Habit 
                     title="Habit"
                     duration="Duration"
-                    handlePress={handleNextupPopup}
-                    handleClose={handleClosePopup}
+                    handlePress={handlePressHabit}
                     isNextUp={true}
                 />
             </View>
