@@ -3,7 +3,7 @@ import React from 'react'
 
 // figure out if isLoading is needed
 
-const CloseButton = ({shouldNotRender, handlePressClose }) => {
+const CloseButton = ({ shouldNotRender, handlePressClose }) => {
     if (!shouldNotRender) {
         return (
             <View
@@ -29,7 +29,7 @@ const Habit = ({ title, duration, handlePress, handleClose, isNextUp }) => {
             onPress={handlePress}
             className="w-[316px] h-[75px] rounded-[12px] bg-[#D9D9D9]"
             activeOpacity={0.7}>
-            <CloseButton 
+            <CloseButton
                 shouldNotRender={isNextUp}
                 handlePressClose={handleClose} />
             <View className="flex-row my-auto justify-between">

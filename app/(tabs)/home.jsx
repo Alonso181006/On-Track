@@ -20,7 +20,7 @@ const Home = () => {
                 <Text className="mr-2 mt-2">Time</Text>
             </View>
             <View className="justify-center items-center w-[330px] h-[100px] mb-[40px] rounded-[12px] bg-[#EFEBEB]">
-                <Habit 
+                <Habit
                     title="Habit"
                     duration="Duration"
                     handlePress={handlePressHabit}

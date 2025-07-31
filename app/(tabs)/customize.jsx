@@ -4,6 +4,9 @@ import { React, useState } from 'react'
 import FormField from '../../components/FormField'
 import DropDown from '../../components/DropDown'
 
+// thinking of ditching this page for a popup 
+// so that the addition and display of habits is easier and less intertwined
+
 const Customize = () => {
 
     const [form, setForm] = useState({ title: '', duration: '' });

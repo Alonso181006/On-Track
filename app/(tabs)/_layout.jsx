@@ -102,7 +102,7 @@ const Tabslayout = () => {
                         )
                     }}
                 />
-                <Tabs.Screen 
+                <Tabs.Screen
                     name='customize'
                     options={{
                         href: null,
