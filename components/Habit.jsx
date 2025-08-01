@@ -12,6 +12,7 @@ const CloseButton = ({ shouldNotRender, handlePressClose }) => {
                 <TouchableOpacity
                     onPress={handlePressClose}
                     className="justify-center items-center w-[8px] h-[8px] rounded-[9999px] bg-[#FF0000] absolute"
+                    activeOpacity={0.7}
                 >
                     <Text
                         className="text-[5px]"
