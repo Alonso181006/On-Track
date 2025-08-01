@@ -1,21 +1,33 @@
-import { Modal, View, Text, TouchableOpacity } from 'react-native'
+import { FlatList, Modal, View, Text, TouchableOpacity } from 'react-native'
 import { React, useState } from 'react'
 
 import FormField from '../../components/FormField'
 import DropDown from '../../components/DropDown'
+import Habit from '../../components/Habit'
+
+// refactor close button because code readability is questionable right now
+// consider blur effect when popup is active
 
 const Create = () => {
     const [habitsArray, setHabitsArray] = useState([])
     const [popupVisible, setPopupVisible] = useState(false)
     const [form, setForm] = useState({ title: '', duration: '' });
     const addHabit = () => {
-
+        const newHabit =
+            <Habit
+                title={form.title}
+                duration={form.duration}
+            />;
+        setHabitsArray(habitsArray => [...habitsArray, newHabit]);
     };
 
     return (
         <View className="justify-center items-center mt-[60px]">
             <Text className="text-4xl font-jaro">Habits</Text>
-            <View className="w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB] my-[40px]" />
+            <FlatList
+                className="w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB] my-[40px]"
+                data={habitsArray}
+            />
             <TouchableOpacity
                 onPress={() => setPopupVisible(true)}
                 className="justify-center items-center w-[250px] h-[50px] rounded-[1000px] bg-[#D9D9D9]"
