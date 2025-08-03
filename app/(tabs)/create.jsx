@@ -13,6 +13,7 @@ const Create = () => {
     const [habitsArray, setHabitsArray] = useState([])
     const [popupVisible, setPopupVisible] = useState(false)
     const [form, setForm] = useState({ title: '', duration: '' });
+
     const addHabit = () => {
         const habitData = { title: form.title, duration: form.duration };
         setHabitsArray(habitsArray => [...habitsArray, habitData]);
@@ -26,14 +27,16 @@ const Create = () => {
                 data={habitsArray}
                 renderItem={
                     ({ item }) => <Habit title={item.title} duration={item.duration} />
-                    }
+                }
                 contentContainerStyle={{
                     alignItems: 'center',
                     marginVertical: 10
                 }}
             />
             <TouchableOpacity
-                onPress={() => setPopupVisible(true)}
+                onPress={() => {
+                    setPopupVisible(true)
+                }}
                 className="justify-center items-center w-[250px] h-[50px] rounded-[1000px] bg-[#D9D9D9]"
                 activeOpacity={0.7}>
                 <Text>Add Habit</Text>
@@ -79,7 +82,10 @@ const Create = () => {
                         <DropDown />
                         <DropDown />
                         <TouchableOpacity
-                            onPress={addHabit}
+                            onPress={() => {
+                                addHabit();
+                                setPopupVisible(false);
+                            }}
                             className="justify-center items-center w-[88px] h-[50px] rounded-[1000px] bg-[#D9D9D9]"
                             activeOpacity={0.7}>
                             <Text>Save</Text>
