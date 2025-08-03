@@ -28,7 +28,7 @@ const Habit = ({ title, duration, handlePress, handleClose, isNextUp }) => {
     return (
         <TouchableOpacity
             onPress={handlePress}
-            className="w-[316px] h-[75px] rounded-[12px] bg-[#D9D9D9]"
+            className="w-[316px] h-[75px] rounded-[12px] bg-[#D9D9D9] my-[5px]" // watch out with this vertical margin just incase it causes issues in the future
             activeOpacity={0.7}>
             <CloseButton
                 shouldNotRender={isNextUp}

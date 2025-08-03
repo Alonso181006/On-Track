@@ -7,18 +7,15 @@ import Habit from '../../components/Habit'
 
 // refactor close button because code readability is questionable right now
 // consider blur effect when popup is active
+// figure out how to implement frequency and timeline after flatlist rendering is working
 
 const Create = () => {
     const [habitsArray, setHabitsArray] = useState([])
     const [popupVisible, setPopupVisible] = useState(false)
     const [form, setForm] = useState({ title: '', duration: '' });
     const addHabit = () => {
-        const newHabit =
-            <Habit
-                title={form.title}
-                duration={form.duration}
-            />;
-        setHabitsArray(habitsArray => [...habitsArray, newHabit]);
+        const habitData = { title: form.title, duration: form.duration };
+        setHabitsArray(habitsArray => [...habitsArray, habitData]);
     };
 
     return (
@@ -27,6 +24,13 @@ const Create = () => {
             <FlatList
                 className="w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB] my-[40px]"
                 data={habitsArray}
+                renderItem={
+                    ({ item }) => <Habit title={item.title} duration={item.duration} />
+                    }
+                contentContainerStyle={{
+                    alignItems: 'center',
+                    marginVertical: 10
+                }}
             />
             <TouchableOpacity
                 onPress={() => setPopupVisible(true)}
