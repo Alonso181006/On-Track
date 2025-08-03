@@ -8,6 +8,7 @@ import Habit from '../../components/Habit'
 // refactor close button because code readability is questionable right now
 // consider blur effect when popup is active
 // figure out how to implement frequency and timeline after flatlist rendering is working
+// Still need to verify if forms are filled, as well as have a check if user is inputting duplicate habits
 
 const Create = () => {
     const [habitsArray, setHabitsArray] = useState([])
