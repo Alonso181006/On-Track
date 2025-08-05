@@ -102,23 +102,6 @@ const Tabslayout = () => {
                         )
                     }}
                 />
-                <Tabs.Screen
-                    name='customize'
-                    options={{
-                        href: null,
-                        title: "Customize",
-                        headerTitleStyle: {
-                            fontFamily: "Jaro-Regular",
-                            fontSize: 24
-                        },
-                        headerTitle: "On Track",
-                        headerTitleAlign: 'left',
-                        headerStyle: {
-                            backgroundColor: '#D9D9D9',
-                            height: 125,
-                        }
-                    }}
-                />
             </Tabs>
         </>
     )

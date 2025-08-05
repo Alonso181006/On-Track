@@ -4,6 +4,7 @@ import { React, useState } from 'react'
 import FormField from '../../components/FormField'
 import DropDown from '../../components/DropDown'
 import Habit from '../../components/Habit'
+import {addHabit, daysMap} from '../global/habits'
 
 // refactor close button because code readability is questionable right now
 // consider blur effect when popup is active

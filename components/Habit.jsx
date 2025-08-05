@@ -24,6 +24,9 @@ const CloseButton = ({ shouldNotRender, handlePressClose }) => {
     return null;
 }
 
+// still need to add date, timeline, and freq
+// need to also remove handlePress, handleClose, isNextUp as params because those are not user choices
+
 const Habit = ({ title, duration, handlePress, handleClose, isNextUp }) => {
     return (
         <TouchableOpacity
