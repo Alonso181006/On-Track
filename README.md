@@ -20,6 +20,11 @@ All icons were obtained from www.flaticon.com
 - React Native
 - Tailwind CSS
 
+# External libraries/plug-ins used:
+- React-native-calendars
+- React-native-picker/picker
+- React-native-datetimepicker
+
 # Authors:
 - Andrew Li
 - Alonso Bastidas
