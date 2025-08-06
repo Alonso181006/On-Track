@@ -81,8 +81,6 @@ const Create = () => {
                             handleChangeText={(e) => setForm({ ...form, duration: e })}
                             otherStyles="w-80 mt-1"
                         />
-                        <DropDown />
-                        <DropDown />
                         <TouchableOpacity
                             onPress={() => {
                                 addHabit();
