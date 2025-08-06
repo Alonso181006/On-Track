@@ -18,12 +18,13 @@ All icons were obtained from www.flaticon.com
 
 # Technologies used:
 - React Native
+- CSS
 - Tailwind CSS
 
-# External libraries/plug-ins used:
+# External libraries used:
 - React-native-calendars
-- React-native-picker/picker
 - React-native-community/datetimepicker
+- React-native-element-dropdown
 
 # Authors:
 - Andrew Li

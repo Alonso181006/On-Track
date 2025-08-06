@@ -2,7 +2,6 @@ import { FlatList, Modal, View, Text, TouchableOpacity } from 'react-native'
 import { React, useState } from 'react'
 
 import FormField from '../../components/FormField'
-import DropDown from '../../components/DropDown'
 import Habit from '../../components/Habit'
 import {addHabit, daysMap} from '../global/habits'
 
@@ -12,8 +11,9 @@ import {addHabit, daysMap} from '../global/habits'
 // Still need to verify if forms are filled, as well as have a check if user is inputting duplicate habits
 
 const Create = () => {
-    const [habitsArray, setHabitsArray] = useState([])
-    const [popupVisible, setPopupVisible] = useState(false)
+    const [habitsArray, setHabitsArray] = useState([]);
+    const [popupVisible, setPopupVisible] = useState(false);
+    const [selectedFrequency, setSelectedFrequency] = useState();
     const [form, setForm] = useState({ title: '', duration: '' });
 
     const addHabit = () => {
@@ -81,6 +81,7 @@ const Create = () => {
                             handleChangeText={(e) => setForm({ ...form, duration: e })}
                             otherStyles="w-80 mt-1"
                         />
+                        
                         <TouchableOpacity
                             onPress={() => {
                                 addHabit();
