@@ -3,7 +3,8 @@ import { React, useState } from 'react'
 
 import FormField from '../../components/FormField'
 import Habit from '../../components/Habit'
-import {addHabit, daysMap} from '../global/habits'
+import DropdownComponent from '../../components/DropdownComponent'
+import { addHabit, daysMap } from '../global/habits'
 
 // refactor close button because code readability is questionable right now
 // consider blur effect when popup is active
@@ -15,6 +16,19 @@ const Create = () => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedFrequency, setSelectedFrequency] = useState();
     const [form, setForm] = useState({ title: '', duration: '' });
+
+    const frequency = [
+        { label: "Don't repeat", value: '1' },
+        { label: "Everyday", value: '2' },
+        { label: "Every Monday", value: '3' },
+        { label: "Every Tuesday", value: '4' },
+        { label: "Every Wednesday", value: '5' },
+        { label: "Every Thursday", value: '6' },
+        { label: "Every Friday", value: '7' },
+        { label: "Every Saturday", value: '8' },
+        { label: "Every Sunday", value: '9' },
+        { label: "Custom", value: '10' },
+    ]
 
     const addHabit = () => {
         const habitData = { title: form.title, duration: form.duration };
@@ -73,15 +87,18 @@ const Create = () => {
                             placeholder="Title"
                             value={form.title}
                             handleChangeText={(e) => setForm({ ...form, title: e })}
-                            otherStyles="w-80 mt-1"
+                            otherStyles="w-80 mt-0.5"
                         />
                         <FormField
                             placeholder="Duration"
                             value={form.duration}
                             handleChangeText={(e) => setForm({ ...form, duration: e })}
-                            otherStyles="w-80 mt-1"
+                            otherStyles="w-80 mt-0.5"
                         />
-                        
+                        <DropdownComponent
+                            title='Frequency'
+                            items={frequency}
+                        />
                         <TouchableOpacity
                             onPress={() => {
                                 addHabit();
