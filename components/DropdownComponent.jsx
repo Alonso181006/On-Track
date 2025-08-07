@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         color: '#7b7b8b'
     },
     selectedTextStyle: {
-        fontSize: 16,
+        fontSize: 14,
     },
     iconStyle: {
         width: 20,

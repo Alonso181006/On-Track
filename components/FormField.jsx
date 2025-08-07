@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 
 import { icons } from '../constants'
 
+// need to figure out how to properly center the text vertically
+
 const FormField = ({ title, value, placeholder, handleChangeText, otherStyles, ...props }) => {
     const [showPassword, setShowPassword] = useState(false)
     const [isFocused, setIsFocused] = useState(false)

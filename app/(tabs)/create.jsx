@@ -90,7 +90,7 @@ const Create = () => {
                     className="items-center justify-center flex-1"
                 >
                     <View
-                        className="items-center w-[340px] h-[600px] rounded-[12px] bg-[#EFEBEB]"
+                        className="items-center w-[340px] h-[630px] rounded-[12px] bg-[#EFEBEB]"
                     >
                         <View
                             className="items-end top-[7px] right-[7px] absolute"
