@@ -7,6 +7,8 @@
 - Coming soon!
 
 # Credits/Attributions:
+- Check icon made by Maxim Basinski Premium
+- Close icon made by Pixel Perfect
 - Ellipsis icon made by Pixel Perfect
 - Eye icon made by Kiranshastry
 - Eye Hidden icon made by th studio

@@ -1,10 +1,11 @@
-import { FlatList, Modal, Platform, View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { Image, FlatList, Modal, Platform, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { React, useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 
 import FormField from '../../components/FormField'
 import Habit from '../../components/Habit'
 import DropdownComponent from '../../components/DropdownComponent'
+import { icons } from '../../constants'
 import { addHabit, daysMap } from '../global/habits'
 
 // refactor close button because code readability is questionable right now
@@ -56,6 +57,16 @@ const Create = () => {
         setShowTimePicker(!showTimePicker);
     }
 
+    const confirmIOSStartDate = () => {
+        setStartDate(startDate.toDateString());
+        setShowStartDatePicker(!showStartDatePicker);
+    }
+
+    const confirmIOSEndDate = () => {
+        setEndDate(endDate.toDateString());
+        setShowEndDatePicker(!showEndDatePicker);
+    }
+
     const toggleStartDatePicker = () => {
         setStartDate(new Date());
         setShowStartDatePicker(!showStartDatePicker);
@@ -69,6 +80,16 @@ const Create = () => {
     const onTimeChange = (event, selectedTime) => {
         const currentTime = selectedTime;
         setTime(new Date(currentTime));
+    }
+
+    const onStartDateChange = (event, selectedStartDate) => {
+        const currentStartDate = selectedStartDate;
+        setStartDate(new Date(currentStartDate));
+    }
+
+    const onEndDateChange = (event, selectedEndDate) => {
+        const currentEndDate = selectedEndDate;
+        setEndDate(new Date(currentEndDate));
     }
 
 
@@ -190,7 +211,7 @@ const Create = () => {
                             <View className={`justify-center border-2 border-blue-black w-[140px] h-16 px-4 bg-black-100 rounded-2xl focus: items-center flex-row ${showStartDatePicker ? 'border-blue-500' : 'border-black-200'}`}>
                                 <TextInput
                                     className='flex-1 text-black font-psemibold text-base'
-                                    value={time}
+                                    value={startDate}
                                     placeholder="Start Date"
                                     placeholderTextColor="#7b7b8b"
                                     editable={false}
@@ -202,7 +223,7 @@ const Create = () => {
                                         display='default'
                                         value={startDate}
                                         mode='date'
-                                        onChange={onTimeChange}
+                                        onChange={onStartDateChange}
                                         style={{
                                             maxHeight: 56,
                                             maxWidth: 140,
@@ -215,7 +236,7 @@ const Create = () => {
                             <View className={`justify-center border-2 border-blue-black w-[140px] h-16 px-4 bg-black-100 rounded-2xl focus: items-center flex-row ${showEndDatePicker ? 'border-blue-500' : 'border-black-200'}`}>
                                 <TextInput
                                     className='flex-1 text-black font-psemibold text-base'
-                                    value={time}
+                                    value={endDate}
                                     placeholder="End Date"
                                     placeholderTextColor="#7b7b8b"
                                     editable={false}
@@ -227,7 +248,7 @@ const Create = () => {
                                         display='default'
                                         value={endDate}
                                         mode='date'
-                                        onChange={onTimeChange}
+                                        onChange={onEndDateChange}
                                         style={{
                                             maxHeight: 56,
                                             maxWidth: 140,
@@ -235,6 +256,74 @@ const Create = () => {
                                             justifyContent: 'center',
                                         }}
                                     />
+                                )}
+                            </View>
+                        </View>
+                        <View className="flex-row">
+                            <View className="justify-start w-[140px] h-[28px] mt-3">
+                                {showStartDatePicker && Platform.OS === "ios" && (
+                                    <View className="flex-row justify-around w-[140px]">
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                toggleStartDatePicker();
+                                            }}
+                                            className="justify-center items-center bg-[#FF0000] w-[28px] h-[28px] rounded-[9999px]"
+                                            activeOpacity={0.7}
+                                        >
+                                            <Image
+                                                source={icons.close}
+                                                className="w-4 h-4" // make sure this is not hardcoded, but im just testing out sizes for rn
+                                                resizeMode='contain'
+                                            />
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                confirmIOSStartDate();
+                                            }}
+                                            className="justify-center items-center bg-[#04F404] w-[28px] h-[28px] rounded-[9999px]"
+                                            activeOpacity={0.7}
+                                        >
+                                            <Image
+                                                source={icons.check}
+                                                className="w-4 h-4" // make sure this is not hardcoded, but im just testing out sizes for rn
+                                                resizeMode='contain'
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                )}
+                            </View>
+                            <View className="justify-end w-[140px] h-[28px] mt-3">
+                                {showEndDatePicker && Platform.OS === "ios" && (
+                                    <View className="">
+                                        <View className="flex-row justify-around w-[140px]">
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    toggleEndDatePicker();
+                                                }}
+                                                className="justify-center items-center bg-[#FF0000] w-[28px] h-[28px] rounded-[9999px]"
+                                                activeOpacity={0.7}
+                                            >
+                                                <Image
+                                                    source={icons.close}
+                                                    className="w-4 h-4" // make sure this is not hardcoded, but im just testing out sizes for rn
+                                                    resizeMode='contain'
+                                                />
+                                            </TouchableOpacity>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    confirmIOSEndDate();
+                                                }}
+                                                className="justify-center items-center bg-[#04F404] w-[28px] h-[28px] rounded-[9999px]"
+                                                activeOpacity={0.7}
+                                            >
+                                                <Image
+                                                    source={icons.check}
+                                                    className="w-4 h-4" // make sure this is not hardcoded, but im just testing out sizes for rn
+                                                    resizeMode='contain'
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
                                 )}
                             </View>
                         </View>
