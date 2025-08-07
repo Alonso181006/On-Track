@@ -259,6 +259,8 @@ const Create = () => {
                                 )}
                             </View>
                         </View>
+                        {(showStartDatePicker || showEndDatePicker) && (
+
                         <View className="flex-row">
                             <View className="justify-start w-[140px] h-[28px] mt-3">
                                 {showStartDatePicker && Platform.OS === "ios" && (
@@ -327,6 +329,7 @@ const Create = () => {
                                 )}
                             </View>
                         </View>
+                        )}
                         <TouchableOpacity
                             onPress={() => {
                                 addHabit();
