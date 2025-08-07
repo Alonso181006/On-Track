@@ -133,7 +133,6 @@ const Create = () => {
                             <TouchableOpacity
                                 onPress={() => {
                                     setPopupVisible(false);
-                                    toggleTimePicker();
                                 }}
                                 className="justify-center items-center w-[15px] h-[15px] rounded-[9999px] bg-[#FF0000] absolute"
                                 activeOpacity={0.7}
