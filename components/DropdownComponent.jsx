@@ -35,7 +35,7 @@ export default DropdownComponent;
 
 const styles = StyleSheet.create({
     dropdown: {
-        marginTop: 23,
+        marginTop: 12,
         height: 56,
         width: 280,
         borderColor: 'black',
