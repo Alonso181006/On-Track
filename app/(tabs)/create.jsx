@@ -10,8 +10,8 @@ import { addHabit, daysMap } from '../global/habits'
 
 // refactor close button because code readability is questionable right now
 // consider blur effect when popup is active
-// figure out how to implement frequency and timeline after flatlist rendering is working
 // Still need to verify if forms are filled, as well as have a check if user is inputting duplicate habits
+// after all functionality is working, check to see if time, startDate, and endDate are redundant states. see if they can just be incorporated into the form state
 
 // Need to eventually cater to android specific issues and ios specific issues with regards to TimePicker
 const Create = () => {
