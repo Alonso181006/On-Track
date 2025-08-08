@@ -18,14 +18,13 @@ const Create = () => {
     let selectedTime;
     const [habitsArray, setHabitsArray] = useState([]);
     const [popupVisible, setPopupVisible] = useState(false);
-    const [selectedFrequency, setSelectedFrequency] = useState();
     const [time, setTime] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [showTimePicker, setShowTimePicker] = useState(false);
     const [showStartDatePicker, setShowStartDatePicker] = useState(false);
     const [showEndDatePicker, setShowEndDatePicker] = useState(false);
-    const [form, setForm] = useState({ title: '', duration: '' });
+    const [form, setForm] = useState({ title: '', duration: '', durationUnits: '', frequency: '' });
 
     const frequency = [
         { label: "Don't repeat", value: '1' },
@@ -40,8 +39,13 @@ const Create = () => {
         { label: "Custom", value: '10' },
     ]
 
+    const timeUnits = [
+        { label: 'Mins', value: '1' },
+        { label: 'Hrs', value: '2' }
+    ]
+
     const addHabit = () => {
-        const habitData = { title: form.title, duration: form.duration };
+        const habitData = { title: form.title, duration: form.duration, durationUnits: form.durationUnits, frequency: form.frequency };
         setHabitsArray(habitsArray => [...habitsArray, habitData]);
     };
 
@@ -149,12 +153,22 @@ const Create = () => {
                             handleChangeText={(e) => setForm({ ...form, title: e })}
                             otherStyles="w-80 mt-3"
                         />
-                        <FormField
-                            placeholder="Duration"
-                            value={form.duration}
-                            handleChangeText={(e) => setForm({ ...form, duration: e })}
-                            otherStyles="w-80 mt-3"
-                        />
+                        <View className="flex-row">
+                            <FormField
+                                placeholder="Duration"
+                                value={form.duration}
+                                handleChangeText={(e) => setForm({ ...form, duration: e })}
+                                otherStyles="w-60 mt-3"
+                            />
+                            <DropdownComponent
+                                title='Unit'
+                                items={timeUnits}
+                                width={70}
+                                px={7}
+                                value={form.durationUnits}
+                                handleChange={(value) => setForm({ ...form, durationUnits: value })}
+                            />
+                        </View>
                         {/* might want to turn this into a custom component or adapt FormField with conditional rendering */}
                         <View className="space-y-2 w-80 mt-3">
                             <View className={`justify-center border-2 border-blue-black w-full h-16 px-4 bg-black-100 rounded-2xl focus: items-center flex-row ${showTimePicker ? 'border-blue-500' : 'border-black-200'}`}>
@@ -205,6 +219,10 @@ const Create = () => {
                         <DropdownComponent
                             title='Frequency'
                             items={frequency}
+                            width={280}
+                            px={14}
+                            value={form.frequency}
+                            handleChange={(value) => setForm({ ...form, frequency: value })}
                         />
                         <View className="w-[280px] h-[56px] mt-3 rounded-2xl flex-row items-center">
                             <View className={`justify-center border-2 border-blue-black w-[140px] h-16 px-4 bg-black-100 rounded-2xl focus: items-center flex-row ${showStartDatePicker ? 'border-blue-500' : 'border-black-200'}`}>
@@ -260,46 +278,13 @@ const Create = () => {
                         </View>
                         {(showStartDatePicker || showEndDatePicker) && (
 
-                        <View className="flex-row">
-                            <View className="justify-start w-[140px] h-[28px] mt-3">
-                                {showStartDatePicker && Platform.OS === "ios" && (
-                                    <View className="flex-row justify-around w-[140px]">
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                toggleStartDatePicker();
-                                            }}
-                                            className="justify-center items-center bg-[#FF0000] w-[28px] h-[28px] rounded-[9999px]"
-                                            activeOpacity={0.7}
-                                        >
-                                            <Image
-                                                source={icons.close}
-                                                className="w-4 h-4" // make sure this is not hardcoded, but im just testing out sizes for rn
-                                                resizeMode='contain'
-                                            />
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                confirmIOSStartDate();
-                                            }}
-                                            className="justify-center items-center bg-[#04F404] w-[28px] h-[28px] rounded-[9999px]"
-                                            activeOpacity={0.7}
-                                        >
-                                            <Image
-                                                source={icons.check}
-                                                className="w-4 h-4" // make sure this is not hardcoded, but im just testing out sizes for rn
-                                                resizeMode='contain'
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-                                )}
-                            </View>
-                            <View className="justify-end w-[140px] h-[28px] mt-3">
-                                {showEndDatePicker && Platform.OS === "ios" && (
-                                    <View className="">
+                            <View className="flex-row">
+                                <View className="justify-start w-[140px] h-[28px] mt-3">
+                                    {showStartDatePicker && Platform.OS === "ios" && (
                                         <View className="flex-row justify-around w-[140px]">
                                             <TouchableOpacity
                                                 onPress={() => {
-                                                    toggleEndDatePicker();
+                                                    toggleStartDatePicker();
                                                 }}
                                                 className="justify-center items-center bg-[#FF0000] w-[28px] h-[28px] rounded-[9999px]"
                                                 activeOpacity={0.7}
@@ -312,7 +297,7 @@ const Create = () => {
                                             </TouchableOpacity>
                                             <TouchableOpacity
                                                 onPress={() => {
-                                                    confirmIOSEndDate();
+                                                    confirmIOSStartDate();
                                                 }}
                                                 className="justify-center items-center bg-[#04F404] w-[28px] h-[28px] rounded-[9999px]"
                                                 activeOpacity={0.7}
@@ -324,16 +309,48 @@ const Create = () => {
                                                 />
                                             </TouchableOpacity>
                                         </View>
-                                    </View>
-                                )}
+                                    )}
+                                </View>
+                                <View className="justify-end w-[140px] h-[28px] mt-3">
+                                    {showEndDatePicker && Platform.OS === "ios" && (
+                                        <View className="">
+                                            <View className="flex-row justify-around w-[140px]">
+                                                <TouchableOpacity
+                                                    onPress={() => {
+                                                        toggleEndDatePicker();
+                                                    }}
+                                                    className="justify-center items-center bg-[#FF0000] w-[28px] h-[28px] rounded-[9999px]"
+                                                    activeOpacity={0.7}
+                                                >
+                                                    <Image
+                                                        source={icons.close}
+                                                        className="w-4 h-4" // make sure this is not hardcoded, but im just testing out sizes for rn
+                                                        resizeMode='contain'
+                                                    />
+                                                </TouchableOpacity>
+                                                <TouchableOpacity
+                                                    onPress={() => {
+                                                        confirmIOSEndDate();
+                                                    }}
+                                                    className="justify-center items-center bg-[#04F404] w-[28px] h-[28px] rounded-[9999px]"
+                                                    activeOpacity={0.7}
+                                                >
+                                                    <Image
+                                                        source={icons.check}
+                                                        className="w-4 h-4" // make sure this is not hardcoded, but im just testing out sizes for rn
+                                                        resizeMode='contain'
+                                                    />
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View>
+                                    )}
+                                </View>
                             </View>
-                        </View>
                         )}
                         <TouchableOpacity
                             onPress={() => {
                                 addHabit();
                                 setPopupVisible(false);
-                                toggleTimePicker();
                             }}
                             className="justify-center items-center mt-3 w-[88px] h-[50px] rounded-[1000px] bg-[#D9D9D9]"
                             activeOpacity={0.7}>

@@ -3,13 +3,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 
 // really need to fix styling with all components especially converting from tailwind specific measurements to raw css
-const DropdownComponent = ({ title, items }) => {
-    const [value, setValue] = useState(null);
+const DropdownComponent = ({ title, items, width, px, value, handleChange }) => {
     const [isFocus, setIsFocus] = useState(false);
 
     return (
         <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: '#3b82f6' }]}
+            style={[
+                styles.dropdown, 
+                {
+                    width: width,
+                    paddingHorizontal: px
+                }, 
+                isFocus && { borderColor: '#3b82f6' }
+            ]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -24,7 +30,7 @@ const DropdownComponent = ({ title, items }) => {
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={item => {
-                setValue(item.value);
+                handleChange(item.value);
                 setIsFocus(false);
             }}
         />
@@ -37,11 +43,9 @@ const styles = StyleSheet.create({
     dropdown: {
         marginTop: 12,
         height: 56,
-        width: 280,
         borderColor: 'black',
         borderWidth: 2,
         borderRadius: 16,
-        paddingHorizontal: 14,
     },
     placeholderStyle: {
         fontSize: 14,
@@ -56,6 +60,6 @@ const styles = StyleSheet.create({
     },
     inputSearchStyle: {
         height: 40,
-        fontSize: 16,
+        fontSize: 14,
     },
 });
