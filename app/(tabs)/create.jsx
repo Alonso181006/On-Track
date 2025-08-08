@@ -24,7 +24,15 @@ const Create = () => {
     const [showTimePicker, setShowTimePicker] = useState(false);
     const [showStartDatePicker, setShowStartDatePicker] = useState(false);
     const [showEndDatePicker, setShowEndDatePicker] = useState(false);
-    const [form, setForm] = useState({ title: '', duration: '', durationUnits: '', frequency: '' });
+    const [form, setForm] = useState({ 
+        title: '',
+        duration: '', 
+        durationUnits: '',
+        timeOfDay: '', 
+        frequency: '',
+        startDate: '', 
+        endDate: '' 
+    });
 
     const frequency = [
         { label: "Don't repeat", value: '1' },
@@ -45,7 +53,15 @@ const Create = () => {
     ]
 
     const addHabit = () => {
-        const habitData = { title: form.title, duration: form.duration, durationUnits: form.durationUnits, frequency: form.frequency };
+        const habitData = { 
+            title: form.title, 
+            duration: form.duration, 
+            durationUnits: form.durationUnits, 
+            timeOfDay: form.timeOfDay,
+            frequency: form.frequency,
+            startDate: form.startDate,
+            endDate: form.endDate
+        };
         setHabitsArray(habitsArray => [...habitsArray, habitData]);
     };
 
@@ -57,16 +73,19 @@ const Create = () => {
     }
 
     const confirmIOSTime = () => {
+        setForm({ ...form, timeOfDay: time.toTimeString()});
         setTime(time.toTimeString());
         setShowTimePicker(!showTimePicker);
     }
 
     const confirmIOSStartDate = () => {
+        setForm({ ...form, startDate: startDate.toDateString()});
         setStartDate(startDate.toDateString());
         setShowStartDatePicker(!showStartDatePicker);
     }
 
     const confirmIOSEndDate = () => {
+        setForm({ ...form, endDate: endDate.toDateString()});
         setEndDate(endDate.toDateString());
         setShowEndDatePicker(!showEndDatePicker);
     }
@@ -104,7 +123,7 @@ const Create = () => {
                 className="w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB] my-[40px]"
                 data={habitsArray}
                 renderItem={
-                    ({ item }) => <Habit title={item.title} duration={item.duration} />
+                    ({ item }) => <Habit title={item.title} duration={item.endDate} />
                 }
                 contentContainerStyle={{
                     alignItems: 'center',
