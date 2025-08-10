@@ -6,7 +6,7 @@ import FormField from '../../components/FormField'
 import Habit from '../../components/Habit'
 import DropdownComponent from '../../components/DropdownComponent'
 import { icons } from '../../constants'
-import { addHabit, daysMap } from '../global/habits'
+import * as habitsManager from '../global/habits'
 
 // refactor close button because code readability is questionable right now
 // consider blur effect when popup is active
@@ -64,6 +64,8 @@ const Create = () => {
         };
 
         // hopefully theres a better way to check if all fields are filled in
+        // eventually should probably highlight the missing field in red
+        // eventually should probably not have to have a set end date but thats not important rn
         if (form.title != '' && form.duration != ''
             && form.durationUnits != '' && form.timeOfDay != ''
             && form.frequency != '' && form.startDate != '' && form.endDate != '') {
@@ -80,20 +82,27 @@ const Create = () => {
     }
 
     const confirmIOSTime = () => {
-        setForm({ ...form, timeOfDay: time.toTimeString() });
-        setTime(time.toTimeString());
+        const formattedTime = time.toLocaleTimeString('en-CA', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        })
+        setForm({ ...form, timeOfDay: formattedTime });
+        setTime(formattedTime);
         setShowTimePicker(!showTimePicker);
     }
 
     const confirmIOSStartDate = () => {
-        setForm({ ...form, startDate: startDate.toDateString() });
-        setStartDate(startDate.toDateString());
+        const formattedStartDate = startDate.toLocaleDateString('en-CA');
+        setForm({ ...form, startDate: formattedStartDate });
+        setStartDate(formattedStartDate);
         setShowStartDatePicker(!showStartDatePicker);
     }
 
     const confirmIOSEndDate = () => {
-        setForm({ ...form, endDate: endDate.toDateString() });
-        setEndDate(endDate.toDateString());
+        const formattedEndDate = endDate.toLocaleDateString('en-CA');
+        setForm({ ...form, endDate: formattedEndDate });
+        setEndDate(formattedEndDate);
         setShowEndDatePicker(!showEndDatePicker);
     }
 

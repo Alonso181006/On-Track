@@ -46,6 +46,5 @@ function showHabits(date) {
 
 export default {
     addHabit,
-    showHabits,
-    daysMap
+    showHabits
 }
