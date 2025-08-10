@@ -24,14 +24,14 @@ const Create = () => {
     const [showTimePicker, setShowTimePicker] = useState(false);
     const [showStartDatePicker, setShowStartDatePicker] = useState(false);
     const [showEndDatePicker, setShowEndDatePicker] = useState(false);
-    const [form, setForm] = useState({ 
+    const [form, setForm] = useState({
         title: '',
-        duration: '', 
+        duration: '',
         durationUnits: '',
-        timeOfDay: '', 
+        timeOfDay: '',
         frequency: '',
-        startDate: '', 
-        endDate: '' 
+        startDate: '',
+        endDate: ''
     });
 
     const frequency = [
@@ -53,16 +53,23 @@ const Create = () => {
     ]
 
     const addHabit = () => {
-        const habitData = { 
-            title: form.title, 
-            duration: form.duration, 
-            durationUnits: form.durationUnits, 
+        const habitData = {
+            title: form.title,
+            duration: form.duration,
+            durationUnits: form.durationUnits,
             timeOfDay: form.timeOfDay,
             frequency: form.frequency,
             startDate: form.startDate,
             endDate: form.endDate
         };
-        setHabitsArray(habitsArray => [...habitsArray, habitData]);
+
+        // hopefully theres a better way to check if all fields are filled in
+        if (form.title != '' && form.duration != ''
+            && form.durationUnits != '' && form.timeOfDay != ''
+            && form.frequency != '' && form.startDate != '' && form.endDate != '') {
+            setHabitsArray(habitsArray => [...habitsArray, habitData]);
+        }
+
     };
 
     // all these functions below are placed together for easy abstraction purposes (don't want to worry about it too much rn)
@@ -73,19 +80,19 @@ const Create = () => {
     }
 
     const confirmIOSTime = () => {
-        setForm({ ...form, timeOfDay: time.toTimeString()});
+        setForm({ ...form, timeOfDay: time.toTimeString() });
         setTime(time.toTimeString());
         setShowTimePicker(!showTimePicker);
     }
 
     const confirmIOSStartDate = () => {
-        setForm({ ...form, startDate: startDate.toDateString()});
+        setForm({ ...form, startDate: startDate.toDateString() });
         setStartDate(startDate.toDateString());
         setShowStartDatePicker(!showStartDatePicker);
     }
 
     const confirmIOSEndDate = () => {
-        setForm({ ...form, endDate: endDate.toDateString()});
+        setForm({ ...form, endDate: endDate.toDateString() });
         setEndDate(endDate.toDateString());
         setShowEndDatePicker(!showEndDatePicker);
     }
@@ -123,7 +130,7 @@ const Create = () => {
                 className="w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB] my-[40px]"
                 data={habitsArray}
                 renderItem={
-                    ({ item }) => <Habit title={item.title} duration={item.endDate} />
+                    ({ item }) => <Habit title={item.title} duration={item.duration} />
                 }
                 contentContainerStyle={{
                     alignItems: 'center',
