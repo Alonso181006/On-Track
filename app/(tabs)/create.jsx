@@ -15,7 +15,6 @@ import * as habitsManager from '../global/habits'
 
 // Need to eventually cater to android specific issues and ios specific issues with regards to TimePicker
 const Create = () => {
-    let selectedTime;
     const [habitsArray, setHabitsArray] = useState([]);
     const [popupVisible, setPopupVisible] = useState(false);
     const [time, setTime] = useState();
@@ -70,6 +69,7 @@ const Create = () => {
             && form.durationUnits != '' && form.timeOfDay != ''
             && form.frequency != '' && form.startDate != '' && form.endDate != '') {
             setHabitsArray(habitsArray => [...habitsArray, habitData]);
+            habitsManager.addHabit(form.startDate, form.timeOfDay, form.title, form.duration);
         }
 
     };
