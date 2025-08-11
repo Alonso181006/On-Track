@@ -24,34 +24,39 @@ const Home = () => {
                     visible={popupVisible}
                     onRequestClose={() => setPopupVisible(false)}
                 >
-                    <View className="justify-center items-center mt-[350px]">
-                        <View
-                            className="items-end w-[340px] top-[7px] right-[7px] absolute"
-                        >
-                            <TouchableOpacity
-                                onPress={() => {
-                                    setPopupVisible(false);
-                                }}
-                                className="justify-center items-center w-[15px] h-[15px] rounded-[9999px] bg-[#FF0000] absolute"
-                                activeOpacity={0.7}
+                    <View className="justify-center items-center mt-[400px]">
+                        <View className="justify-center items-center w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB]">
+                            <View
+                                className="items-end top-[7px] right-[7px] absolute"
                             >
-                                <Text
-                                    className="text-[5px]"
-                                >x</Text>
-                            </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setPopupVisible(false);
+                                    }}
+                                    className="justify-center items-center w-[15px] h-[15px] rounded-[9999px] bg-[#FF0000] absolute"
+                                    activeOpacity={0.7}
+                                >
+                                    <Text
+                                        className="text-[5px]"
+                                    >x</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View>
+                                <FlatList
+                                    className="my-[20px]"
+                                    data={habitsArray}
+                                    renderItem={
+                                        ({ item }) => <Habit title={item.habitTitle} duration={item.habitDuration} />
+                                    }
+                                    contentContainerStyle={{
+                                        alignItems: 'center',
+                                        marginVertical: 10
+                                    }}
+                                />
+                            </View>
                         </View>
-                        <FlatList
-                            className="w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB] my-[40px]"
-                            data={habitsArray}
-                            renderItem={
-                                ({ item }) => <Habit title={item.habitTitle} duration={item.habitDuration} />
-                            }
-                            contentContainerStyle={{
-                                alignItems: 'center',
-                                marginVertical: 10
-                            }}
-                        />
                     </View>
+
 
                 </Modal>
             )
