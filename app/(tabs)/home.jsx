@@ -1,22 +1,43 @@
 import { View, Text, TouchableOpacity, Modal, FlatList } from 'react-native'
-import { React, useState } from 'react'
+import { React, useState, useCallback } from 'react'
 import { Calendar } from 'react-native-calendars'
+import { useFocusEffect } from 'expo-router'
 
 import Habit from '../../components/Habit'
 import * as habitsManager from '../global/habits'
 
 // lots to fix here, lots of hardcoded values, and static values that should be dynamic
+// Check if selected and selectedDay are actually just doing the same thing
+// Real time re-rendering is still buggy, popup closes and opens upon removing a "habit"
 
 const Home = () => {
     const [selected, setSelected] = useState(false);
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedDay, setSelectedDay] = useState('');
+    const [habitsArray, setHabitsArray] = useState([]);
     let days = habitsManager.daysMap;
+    let habitsForDay;
 
+    const handlePressHabit = () => {
+
+    }
+
+    const removeHabit = (timeOfDay) => {
+        habitsForDay.delete(timeOfDay);
+        setHabitsArray(Array.from(habitsForDay.values()));
+    }
+
+    // fixes issue where empty popup shows up when adding a habit
+    useFocusEffect(
+        useCallback(() => {
+          return () => setSelectedDay(false);
+        }, [])
+      );
+
+    // abstract this into a custom component
     const DayPopup = ({ date }) => {
-        const habitsForDay = days.get(date);
-        if (days.has(date)) {
-            const habitsArray = Array.from(habitsForDay.values());
+        habitsForDay = days.get(date);
+        if (days.has(date) && habitsForDay.size != 0) {
             return (
                 <Modal
                     animationType='slide'
@@ -46,7 +67,14 @@ const Home = () => {
                                     className="my-[20px]"
                                     data={habitsArray}
                                     renderItem={
-                                        ({ item }) => <Habit title={item.habitTitle} duration={item.habitDuration} />
+                                        ({ item }) =>
+                                            // <Habit
+                                            //     title={item.habitTitle}
+                                            //     duration={item.habitDuration}
+                                            // />
+                                            <TouchableOpacity onPress={() => removeHabit(item.habitTimeOfDay)}>
+                                                <Text>{item.habitTimeOfDay}</Text>
+                                            </TouchableOpacity>
                                     }
                                     contentContainerStyle={{
                                         alignItems: 'center',
@@ -64,9 +92,6 @@ const Home = () => {
         else {
             return null;
         }
-    }
-    const handlePressHabit = () => {
-
     }
 
 
@@ -88,6 +113,8 @@ const Home = () => {
                 onDayPress={day => {
                     setSelected(day.dateString);
                     if (days.has(day.dateString)) {
+                        habitsForDay = days.get(day.dateString);
+                        setHabitsArray(Array.from(habitsForDay.values()));
                         setSelectedDay(day.dateString);
                         setPopupVisible(true);
                     }

@@ -8,11 +8,11 @@ export function addHabit(date, timeOfDay, title, duration) {
     if (daysMap.has(date)) {
         const habitsForDay = daysMap.get(date);
         if (!habitsForDay.has(timeOfDay)) {
-            habitsForDay.set(timeOfDay, { habitTitle: title, habitDuration: duration });
+            habitsForDay.set(timeOfDay, { habitTitle: title, habitDuration: duration, habitTimeOfDay: timeOfDay });
         }
     } else {
         let habitsMap = new Map();
-        habitsMap.set(timeOfDay, { habitTitle: title, habitDuration: duration })
+        habitsMap.set(timeOfDay, { habitTitle: title, habitDuration: duration, habitTimeOfDay: timeOfDay })
         daysMap.set(date, habitsMap);
     }
 

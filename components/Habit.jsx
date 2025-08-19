@@ -3,6 +3,8 @@ import React from 'react'
 
 // figure out if isLoading is needed
 
+// abstract this into a custom component
+
 const CloseButton = ({ shouldNotRender, handlePressClose }) => {
     if (!shouldNotRender) {
         return (

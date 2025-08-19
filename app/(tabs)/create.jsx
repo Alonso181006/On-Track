@@ -139,7 +139,7 @@ const Create = () => {
                 className="w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB] my-[40px]"
                 data={habitsArray}
                 renderItem={
-                    ({ item }) => <Habit title={item.title} duration={item.duration} />
+                    ({ item }) => <Habit title={item.title} duration={item.duration}/>
                 }
                 contentContainerStyle={{
                     alignItems: 'center',
