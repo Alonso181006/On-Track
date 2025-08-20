@@ -6,8 +6,11 @@ import { useFocusEffect } from 'expo-router'
 import Habit from '../../components/Habit'
 import * as habitsManager from '../global/habits'
 
+// Refactoring:
 // lots to fix here, lots of hardcoded values, and static values that should be dynamic
 // Check if selected and selectedDay are actually just doing the same thing
+
+// Bugs to fix:
 // Real time re-rendering is still buggy, popup closes and opens upon removing a "habit"
 
 const Home = () => {
@@ -68,13 +71,14 @@ const Home = () => {
                                     data={habitsArray}
                                     renderItem={
                                         ({ item }) =>
-                                            // <Habit
-                                            //     title={item.habitTitle}
-                                            //     duration={item.habitDuration}
-                                            // />
-                                            <TouchableOpacity onPress={() => removeHabit(item.habitTimeOfDay)}>
-                                                <Text>{item.habitTimeOfDay}</Text>
-                                            </TouchableOpacity>
+                                            <Habit
+                                                title={item.habitTitle}
+                                                duration={item.habitDuration}
+                                                handleClose={() => removeHabit(item.habitTimeOfDay)}
+                                            />
+                                            // <TouchableOpacity onPress={() => removeHabit(item.habitTimeOfDay)}>
+                                            //     <Text>{item.habitTimeOfDay}</Text>
+                                            // </TouchableOpacity>
                                     }
                                     contentContainerStyle={{
                                         alignItems: 'center',
