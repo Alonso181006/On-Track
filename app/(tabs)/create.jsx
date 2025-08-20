@@ -1,6 +1,7 @@
 import { Image, FlatList, Modal, Platform, View, Text, TextInput, TouchableOpacity } from 'react-native'
-import { React, useState } from 'react'
+import { React, useState, useCallback } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { useFocusEffect } from 'expo-router'
 
 import FormField from '../../components/FormField'
 import Habit from '../../components/Habit'
@@ -8,12 +9,17 @@ import DropdownComponent from '../../components/DropdownComponent'
 import { icons } from '../../constants'
 import * as habitsManager from '../global/habits'
 
+// Refactoring:
 // refactor close button because code readability is questionable right now
 // consider blur effect when popup is active
 // Still need to verify if forms are filled, as well as have a check if user is inputting duplicate habits
 // after all functionality is working, check to see if time, startDate, and endDate are redundant states. see if they can just be incorporated into the form state
-
 // Need to eventually cater to android specific issues and ios specific issues with regards to TimePicker
+
+// Bugs:
+// idk why i have to keep redefining habitsForDay
+// need to make sure all fields clear after a habit has been successfully added
+
 const Create = () => {
     const [habitsArray, setHabitsArray] = useState([]);
     const [popupVisible, setPopupVisible] = useState(false);
@@ -51,25 +57,23 @@ const Create = () => {
         { label: 'Hrs', value: '2' }
     ]
 
-    const addHabit = () => {
-        const habitData = {
-            title: form.title,
-            duration: form.duration,
-            durationUnits: form.durationUnits,
-            timeOfDay: form.timeOfDay,
-            frequency: form.frequency,
-            startDate: form.startDate,
-            endDate: form.endDate
-        };
+    const currentDate = new Date();
+    const formattedCurrentDate = currentDate.toLocaleDateString();
+    const days = habitsManager.daysMap;
+    let habitsForDay;
 
+    const addHabit = () => {
         // hopefully theres a better way to check if all fields are filled in
         // eventually should probably highlight the missing field in red
         // eventually should probably not have to have a set end date but thats not important rn
         if (form.title != '' && form.duration != ''
             && form.durationUnits != '' && form.timeOfDay != ''
             && form.frequency != '' && form.startDate != '' && form.endDate != '') {
-            setHabitsArray(habitsArray => [...habitsArray, habitData]);
             habitsManager.addHabit(form.startDate, form.timeOfDay, form.title, form.duration);
+            if (days.has(formattedCurrentDate)) {
+                habitsForDay = days.get(formattedCurrentDate);
+                setHabitsArray(Array.from(habitsForDay.values()));
+            }
         }
 
     };
@@ -131,6 +135,22 @@ const Create = () => {
         setEndDate(new Date(currentEndDate));
     }
 
+    const removeHabit = (timeOfDay) => {
+        habitsForDay = days.get(formattedCurrentDate);
+        habitsForDay.delete(timeOfDay);
+        setHabitsArray(Array.from(habitsForDay.values()));
+    }
+
+    // re-renders create flatlist while changes are occuring on a different page
+    useFocusEffect(
+        useCallback(() => {
+            if (days.has(formattedCurrentDate)) {
+                habitsForDay = days.get(formattedCurrentDate);
+                return () => setHabitsArray(Array.from(habitsForDay.values()));
+            }
+        }, [])
+    );
+
 
     return (
         <View className="justify-center items-center mt-[60px]">
@@ -139,7 +159,12 @@ const Create = () => {
                 className="w-[340px] h-[425px] rounded-[12px] bg-[#EFEBEB] my-[40px]"
                 data={habitsArray}
                 renderItem={
-                    ({ item }) => <Habit title={item.title} duration={item.duration}/>
+                    ({ item }) =>
+                        <Habit
+                            title={item.habitTitle}
+                            duration={item.habitDuration}
+                            handleClose={() => removeHabit(item.habitTimeOfDay)}
+                        />
                 }
                 contentContainerStyle={{
                     alignItems: 'center',
