@@ -12,12 +12,16 @@ import * as habitsManager from '../global/habits'
 
 // Bugs to fix:
 // Real time re-rendering is still buggy, popup closes and opens upon removing a "habit"
+// Fix the fact that habitsForDay gets defined many times (useState?)
 
 const Home = () => {
     const [selected, setSelected] = useState(false);
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedDay, setSelectedDay] = useState('');
     const [habitsArray, setHabitsArray] = useState([]);
+    const [hasToday, setHasToday] = useState(false)
+    const currentDate = new Date();
+    const formattedCurrentDate = currentDate.toLocaleDateString();
     let days = habitsManager.daysMap;
     let habitsForDay;
 
@@ -25,17 +29,23 @@ const Home = () => {
 
     }
 
+    // consider moving this function as well as the removeHabit function in the create page to habits.jsx
+    // once moved to habits.jsx, implement feature where when a day no longer has any habits, delete day from map
     const removeHabit = (timeOfDay) => {
         habitsForDay.delete(timeOfDay);
         setHabitsArray(Array.from(habitsForDay.values()));
+        setHasToday(days.get(formattedCurrentDate).size > 0); // temporary
     }
 
     // fixes issue where empty popup shows up when adding a habit
     useFocusEffect(
         useCallback(() => {
-          return () => setSelectedDay(false);
+            return () => {
+                setSelectedDay(false)
+                setHasToday(days.get(formattedCurrentDate).size > 0); // temporary
+            }
         }, [])
-      );
+    );
 
     // abstract this into a custom component
     const DayPopup = ({ date }) => {
@@ -76,9 +86,6 @@ const Home = () => {
                                                 duration={item.habitDuration}
                                                 handleClose={() => removeHabit(item.habitTimeOfDay)}
                                             />
-                                            // <TouchableOpacity onPress={() => removeHabit(item.habitTimeOfDay)}>
-                                            //     <Text>{item.habitTimeOfDay}</Text>
-                                            // </TouchableOpacity>
                                     }
                                     contentContainerStyle={{
                                         alignItems: 'center',
@@ -107,8 +114,8 @@ const Home = () => {
             </View>
             <View className="justify-center items-center w-[330px] h-[100px] mb-[40px] mt-[5px] rounded-[12px] bg-[#EFEBEB]">
                 <Habit
-                    title="Habit"
-                    duration="Duration"
+                    title={hasToday ? days.get(formattedCurrentDate).values().next().value.habitTitle : ''}
+                    duration={hasToday ? days.get(formattedCurrentDate).values().next().value.habitDuration : ''}
                     handlePress={handlePressHabit}
                     isNextUp={true}
                 />

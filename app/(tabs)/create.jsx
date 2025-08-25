@@ -57,8 +57,10 @@ const Create = () => {
         { label: 'Hrs', value: '2' }
     ]
 
+    // these 2 lines of code are in home.jsx, consider moving them to habits.jsx once export default issue is fixed
     const currentDate = new Date();
     const formattedCurrentDate = currentDate.toLocaleDateString();
+
     const days = habitsManager.daysMap;
     let habitsForDay;
 
