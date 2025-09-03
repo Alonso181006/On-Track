@@ -1,8 +1,10 @@
 # Welcome to On Track!
 
 # Description:
-- Coming soon!
-
+- Habit trackers and productivity apps are often too rigid and do not accurately reflect how dynamic life can be, so we created On Track to solve this issue.
+- On Track connects to your calendar to understand your schedule and plan your habits accordingly.
+- Missed a Habit, don't worry, the app automatically schedules it to the next available time slots and gives you reminders to keep you On Track!
+  
 # Preview:
 - Coming soon!
 
